@@ -20,13 +20,13 @@
 
     <Grid x:Name="LayoutRoot">
 
-        <TextBlock FontSize="36"
-                   FontWeight="Bold"
-                   Foreground="Purple"
-                   Text="{Binding WelcomeTitle}"
-                   VerticalAlignment="Center"
-                   HorizontalAlignment="Center"
-                   TextWrapping="Wrap" />
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition/>
+			<ColumnDefinition/>
+		</Grid.ColumnDefinitions>
 
-    </Grid>
+		<TextBox Grid.Column="0" Text="{Binding Input, UpdateSourceTrigger=PropertyChanged}" AcceptsReturn="True" AcceptsTab="True"/>
+		<TextBox Grid.Column="1" Text="{Binding Output}" AcceptsReturn="True" AcceptsTab="True"/>
+
+	</Grid>
 </Window>

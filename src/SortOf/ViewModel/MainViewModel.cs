@@ -1,5 +1,7 @@
-﻿using GalaSoft.MvvmLight;
+﻿using System;
+using GalaSoft.MvvmLight;
 using SortOf.Model;
+using System.Linq;
 
 namespace SortOf.ViewModel
 {
@@ -13,28 +15,6 @@ namespace SortOf.ViewModel
 	{
 		private readonly IDataService _dataService;
 
-		/// <summary>
-		/// The <see cref="WelcomeTitle" /> property's name.
-		/// </summary>
-		public const string WelcomeTitlePropertyName = "WelcomeTitle";
-
-		private string _welcomeTitle = string.Empty;
-
-		/// <summary>
-		/// Gets the WelcomeTitle property.
-		/// Changes to that property's value raise the PropertyChanged event. 
-		/// </summary>
-		public string WelcomeTitle
-		{
-			get
-			{
-				return _welcomeTitle;
-			}
-			set
-			{
-				Set(ref _welcomeTitle, value);
-			}
-		}
 
 		/// <summary>
 		/// Initializes a new instance of the MainViewModel class.
@@ -51,9 +31,31 @@ namespace SortOf.ViewModel
 						return;
 					}
 
-					WelcomeTitle = item.Title;
+					Input = "Bernie\r\nAgatha";
+					Output = "Agatha\r\nBernie";
 				});
+
+			this.PropertyChanged += MainViewModel_PropertyChanged;
 		}
+
+		private void MainViewModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+		{
+			switch(e.PropertyName)
+			{
+				case InputPropertyName:
+					Sort();
+					break;
+			}
+		}
+
+		private void Sort()
+		{
+			Output = string.Join(Environment.NewLine, Input
+				.Split(new String[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries)
+				.OrderBy(s => s));
+
+		}
+
 
 		////public override void Cleanup()
 		////{
@@ -61,5 +63,71 @@ namespace SortOf.ViewModel
 
 		////    base.Cleanup();
 		////}
+		///
+		#region Properties
+		#region Input
+		/// <summary>
+		/// The <see cref="Input" /> property's name.
+		/// </summary>
+		public const string InputPropertyName = "Input";
+
+		private string _input = "input";
+
+		/// <summary>
+		/// Sets and gets the Input property.
+		/// Changes to that property's value raise the PropertyChanged event. 
+		/// </summary>
+		public string Input
+		{
+			get
+			{
+				return _input;
+			}
+
+			set
+			{
+				if (_input == value)
+				{
+					return;
+				}
+
+				_input = value;
+				RaisePropertyChanged(InputPropertyName);
+			}
+		}
+		#endregion
+		#region Output
+		/// <summary>
+			/// The <see cref="Output" /> property's name.
+			/// </summary>
+		public const string OutputPropertyName = "Output";
+
+		private string _output = "Output";
+
+		/// <summary>
+		/// Sets and gets the Output property.
+		/// Changes to that property's value raise the PropertyChanged event. 
+		/// </summary>
+		public string Output
+		{
+			get
+			{
+				return _output;
+			}
+
+			set
+			{
+				if (_output == value)
+				{
+					return;
+				}
+
+				_output = value;
+				RaisePropertyChanged(OutputPropertyName);
+			}
+		}
+		#endregion
+		#endregion
+
 	}
 }

@@ -9,8 +9,12 @@ namespace SortOf.Design
 		{
 			// Use this to create design time data
 
-			var item = new DataItem("Welcome to MVVM Light [design]");
+			var item = new DataItem("Bernie\r\nAgatha");
 			callback(item, null);
+		}
+		public void SaveData(string lastInput)
+		{
+			/* nothing to do in design mode */
 		}
 	}
 }

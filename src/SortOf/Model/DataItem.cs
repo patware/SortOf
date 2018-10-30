@@ -2,15 +2,15 @@
 {
 	public class DataItem
 	{
-		public string Title
+		public string LastInput
 		{
 			get;
 			private set;
 		}
 
-		public DataItem(string title)
+		public DataItem(string lastInput)
 		{
-			Title = title;
+			LastInput = lastInput;
 		}
 	}
 }

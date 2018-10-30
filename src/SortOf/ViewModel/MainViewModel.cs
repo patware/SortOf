@@ -22,6 +22,9 @@ namespace SortOf.ViewModel
 		public MainViewModel(IDataService dataService)
 		{
 			_dataService = dataService;
+
+			this.PropertyChanged += MainViewModel_PropertyChanged;
+
 			_dataService.GetData(
 				(item, error) =>
 				{
@@ -31,11 +34,9 @@ namespace SortOf.ViewModel
 						return;
 					}
 
-					Input = "Bernie\r\nAgatha";
-					Output = "Agatha\r\nBernie";
+					Input = item.LastInput;
 				});
 
-			this.PropertyChanged += MainViewModel_PropertyChanged;
 		}
 
 		private void MainViewModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -44,6 +45,7 @@ namespace SortOf.ViewModel
 			{
 				case InputPropertyName:
 					Sort();
+					_dataService.SaveData(this.Input);
 					break;
 			}
 		}

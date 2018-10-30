@@ -8,10 +8,10 @@ using System.Windows;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("SortOf")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("So simple sorting")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyProduct("SortOf")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Patware")]
 [assembly: AssemblyCopyright("Copyright ©  2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
